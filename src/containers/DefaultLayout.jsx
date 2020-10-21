@@ -4,23 +4,34 @@ import { Layout, BackTop } from 'antd'
 
 import routes from '@/routes'
 
-import AppHeader from './AppHeader.js'
-import AppAside from './AppAside.js'
-import AppFooter from './AppFooter.js'
+import avatar from '@/assets/images/user.jpg'
+
+import menu from './menu'
+
+import AppHeader from './AppHeader.jsx'
+import AppAside from './AppAside.jsx'
+import AppFooter from './AppFooter.jsx'
+
+import '@/style/layout.scss'
 
 
 const { Content } = Layout
 
 class DefaultLayout extends Component {
+    
+    state = {
+        avatar
+    }
+
     render() {
         let { auth } = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : ''
 
         return (
-            <Layout>
+            <Layout className='app'>
                 <BackTop></BackTop>
-                <AppAside></AppAside>
+                <AppAside menu={menu}></AppAside>
                 <Layout>
-                    <AppHeader></AppHeader>
+                    <AppHeader avatar={avatar}></AppHeader>
                     <Content>
                         <Switch>
                             {routes.map(item => {

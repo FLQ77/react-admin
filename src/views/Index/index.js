@@ -1,19 +1,4 @@
-import React, {Component} from 'react' 
-import { Layout } from 'antd'
-
-class Index extends Component {
-
-    render() {
-        return (
-            <Layout>
-                <div>
-                    This is index
-                </div>
-            </Layout>
-            
-        )
-    }
-}
+import Index from './Index.jsx'
 
 
 export default Index
