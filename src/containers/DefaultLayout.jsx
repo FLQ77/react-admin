@@ -20,19 +20,33 @@ const { Content } = Layout
 class DefaultLayout extends Component {
     
     state = {
-        avatar
+        avatar,
+        menuToggle:false
+    }
+
+    menuClick = () =>{
+        this.setState((state)=>{
+            return { menuToggle: !state.menuToggle}
+        })
     }
 
     render() {
+        //let  { menuToggle,menuClick } = this.props
+
         let { auth } = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : ''
 
         return (
             <Layout className='app'>
                 <BackTop></BackTop>
-                <AppAside menu={menu}></AppAside>
-                <Layout>
-                    <AppHeader avatar={avatar}></AppHeader>
-                    <Content>
+                <AppAside menu={menu} menuToggle={this.state.menuToggle}></AppAside>
+                <Layout style={{ marginLeft: this.state.menuToggle ? '80px' : '200px', minHeight: '100vh' }}>
+                    <AppHeader 
+                        avatar={avatar} 
+                        menuToggle={ this.state.menuToggle } 
+                        menuClick={this.menuClick}
+                        >    
+                    </AppHeader>
+                    <Content className='content'>
                         <Switch>
                             {routes.map(item => {
                                 return (

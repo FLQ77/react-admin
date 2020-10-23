@@ -8,9 +8,9 @@ import CustomMenu from '@/components/CustomMenu'
 const { Sider } = Layout
 
 const AppAside = props => {
-    let { menu } = props
+    let { menu,menuToggle } = props
     return (
-        <Sider className='aside'>
+        <Sider className='aside' collapsed={menuToggle}>
             <div className='logo'>
                 <a rel='noopener noreferrer' href='https://github.com/FLQ77' target='_blank'>
                     <GithubOutlined style={{ fontSize:'3.8rem', color: '#fff'}} />

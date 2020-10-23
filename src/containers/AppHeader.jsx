@@ -6,7 +6,9 @@ import {
     EditOutlined,
     SettingOutlined,
     LogoutOutlined,
-    UserOutlined
+    UserOutlined,
+    MenuUnfoldOutlined,
+    MenuFoldOutlined
 } from '@ant-design/icons'
 
 const { Header } = Layout
@@ -38,17 +40,18 @@ const AppHeader = props => {
     return (
         <Header className='header'>
             <div className='left'>
-                This is left
+                { menuToggle ? (<MenuUnfoldOutlined style={{ fontSize: '2rem',cursor: 'pointer' }} onClick={menuClick} />) : 
+                    (<MenuFoldOutlined style={{ fontSize: '2rem',cursor: 'pointer' }}  onClick={menuClick} />) }    
             </div>
             <div className='right'>
                 <div className='mr15'>
-                    <a rel='noopener noreferrer' href='https://github.com/ltadpoles/react-admin' target='_blank'>
+                    <a rel='noopener noreferrer' href='https://github.com/FLQ77/react-admin' target='_blank'>
                         <GithubOutlined style={{ color: '#000' }} />
                     </a>
                 </div>
                 <div className='mr15'>
                     <Badge dot={true}>
-                        <a rel='noopener noreferrer' href='https://github.com/ltadpoles/react-admin' style={{ color: '#000'}}>
+                        <a rel='noopener noreferrer' href='https://github.com/FLQ77/react-admin' style={{ color: '#000'}}>
                             <BellOutlined />
                         </a>
                     </Badge>

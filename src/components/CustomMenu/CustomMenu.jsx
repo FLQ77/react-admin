@@ -1,5 +1,6 @@
 import { Menu } from 'antd'
 import React, { Component } from 'react'
+import * as Icon from '@ant-design/icons'
 
 import { Link, withRouter } from 'react-router-dom'
 
@@ -36,10 +37,10 @@ class CustomMenu extends Component {
 
     }
 
-    
-
     renderMenuItem = ({ key, icon, title }) => (
-        <Menu.Item key={key}>
+        <Menu.Item key={key}
+            icon={ icon ? React.createElement(Icon[icon]) : '' }
+        >
             <Link to={key}>
                 <span>{title}</span>
             </Link>
@@ -51,6 +52,7 @@ class CustomMenu extends Component {
         return (
             <Menu.SubMenu
                 key={key}
+                icon={ icon ? React.createElement(Icon[icon]) : '' }
                 title={
                     <span>
                         <span>{ title }</span>
@@ -66,6 +68,7 @@ class CustomMenu extends Component {
 
     render() {
         let { openKeys, selectedKeys } = this.state
+         
         return (
             <Menu 
                 mode='inline'
