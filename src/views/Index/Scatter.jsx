@@ -53,8 +53,8 @@ let data = [
 class Scatter extends Component {
 
     componentDidMount() {
-        let myChart = echarts.init(document.getElementById('scatter'))
-        myChart.setOption({
+        let myEchart = echarts.init(document.getElementById('scatter'))
+        myEchart.setOption({
             legend: {
                 right: 10,
                 data: ['1990','2015']
@@ -146,7 +146,7 @@ class Scatter extends Component {
             ]
         })
         window.addEventListener('resize', function() {
-            myChart.resize()
+            myEchart.resize()
         })
     }
 
