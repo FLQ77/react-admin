@@ -19,7 +19,14 @@ const FormStepView = loadable(() => import(/* webpackChunkName: 'formStep' */ '@
 const TableView = loadable(() => import(/* webpackChunkName: 'table' */ '@/views/ShowView/Table'))
 const CollapseView = loadable(() => import(/* webpackChunkName: 'collapse' */ '@/views/ShowView/Collapse'))
 const TreeView = loadable(() => import(/* webpackChunkName: 'tree' */ '@/views/ShowView/Tree'))
-// const TabsView = loadable(() => import(/* webpackChunkName: 'tabs' */ '@/views/ShowView/Tabs'))
+const TabsView = loadable(() => import(/* webpackChunkName: 'tabs' */ '@/views/ShowView/Tabs'))
+
+// 其它
+const ProgressView = loadable(() => import(/* webpackChunkName: 'progress' */ '@/views/Others/Progress'))
+const AnimationView = loadable(() => import(/* webpackChunkName: 'animation' */ '@/views/Others/Animation'))
+const EditorView = loadable(() => import(/* webpackChunkName: 'editor' */ '@/views/Others/Editor'))
+const UploadView = loadable(() => import(/* webpackChunkName: 'upload' */ '@/views/Others/Upload'))
+
 
 const routes = [
     { path: '/index',exact: true, name: 'Index', component: Index, auth: [1] },
@@ -32,7 +39,12 @@ const routes = [
     { path: '/form/step-form', exact: false, name: '步骤表单', component: FormStepView },
     { path: '/show/table', exact: false, name: '表格', component: TableView },
     { path: '/show/collapse', exact: false, name: '折叠面板', component: CollapseView },
-    { path: '/show/tree', exact: false, name: '树状图', component: TreeView }
+    { path: '/show/tree', exact: false, name: '树状图', component: TreeView },
+    { path: '/show/tabs', exact: false, name: '标签页', component: TabsView },
+    { path: '/others/progress', exact: false, name: '进度条', component: ProgressView },
+    { path: '/others/animation', exact: false, name: '动画', component: AnimationView },
+    { path: '/others/upload', exact: false, name: '上传', component: UploadView },
+    { path: '/others/editor', exact: false, name: '富文本', component: EditorView }
 ]
 
 

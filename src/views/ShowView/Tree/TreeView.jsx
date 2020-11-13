@@ -268,6 +268,95 @@ class TreeView3 extends Component {
   }
 }
 
+
+class TreeView4 extends Component {
+
+  state = {
+    gData,
+    expandedKeys: ['0-0', '0-0-0', '0-0-0-0'],
+  }
+
+  onDragEnter = info => {
+    console.log(info)
+  }
+
+  onDrop = info => {
+    console.log(info);
+    const dropKey = info.node.props.eventKey;
+    const dragKey = info.dragNode.props.eventKey;
+    const dropPos = info.node.props.pos.split('-');
+    const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1]);
+
+    const loop = (data, key, callback) => {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].key === key) {
+          return callback(data[i], i, data);
+        }
+        if (data[i].children) {
+          loop(data[i].children, key, callback);
+        }
+      }
+    };
+    const data = [...this.state.gData];
+
+    // Find dragObject
+    let dragObj;
+    loop(data, dragKey, (item, index, arr) => {
+      arr.splice(index, 1);
+      dragObj = item;
+    });
+
+    if (!info.dropToGap) {
+      // Drop on the content
+      loop(data, dropKey, item => {
+        item.children = item.children || [];
+        // where to insert 示例添加到尾部，可以是随意位置
+        item.children.push(dragObj);
+      });
+    } else if (
+      (info.node.props.children || []).length > 0 && // Has children
+      info.node.props.expanded && // Is expanded
+      dropPosition === 1 // On the bottom gap
+    ) {
+      loop(data, dropKey, item => {
+        item.children = item.children || [];
+        // where to insert 示例添加到头部，可以是随意位置
+        item.children.unshift(dragObj);
+      });
+    } else {
+      let ar;
+      let i;
+      loop(data, dropKey, (item, index, arr) => {
+        ar = arr;
+        i = index;
+      });
+      if (dropPosition === -1) {
+        ar.splice(i, 0, dragObj);
+      } else {
+        ar.splice(i + 1, 0, dragObj);
+      }
+    }
+
+    this.setState({
+      gData: data,
+    });
+  };
+
+  render() {
+    return (
+      <Tree
+        className="draggable-tree"
+        defaultExpandedKeys={this.state.expandedKeys}
+        draggable
+        blockNode
+        onDragEnter={this.onDragEnter}
+        onDrop={this.onDrop}
+        treeData={this.state.gData}
+      />
+    )
+  }
+}
+
 class TreeView extends Component {
 
     render() {
@@ -288,7 +377,7 @@ class TreeView extends Component {
                             <TreeView1 />
                         </div>
                         <div className='base-style'>
-                            <Divider orientation='right'>带搜索控件</Divider>
+                            <Divider orientation='left'>带搜索控件</Divider>
                             <TreeView3 />
                         </div>
                     </Col>
@@ -296,6 +385,10 @@ class TreeView extends Component {
                         <div className='base-style'>
                             <Divider orientation='right'>受控控件</Divider>
                             <TreeView2 />
+                        </div>
+                        <div className="base-style">
+                        <Divider orientation='right'>可拖拽控件</Divider>
+                            <TreeView4 />
                         </div>
                     </Col>
                 </Row>
